@@ -1,0 +1,40 @@
+{{#if authData}}
+    Logged in: {{authData.uid}}
+    <button {{action "logout"}}>Log out</button>
+{{else}}
+    <h2>Log in</h2>
+    <form {{action "login" on="submit"}}>
+        Email:
+        {{input type="email" value=email required="required"}}
+        <br />
+        Password:
+        {{input type="password" value=password required="required"}}
+        <br />
+        <label>
+            {{input type="checkbox" checked=rememberMe}} Remember me
+        </label>
+        <br />
+        <button>Log in</button>
+    </form>
+
+    <h2>Sign up</h2>
+    <form {{action "signup" on="submit"}}>
+        First name:
+        {{input value=firstName required="required"}}
+        <br />
+        Last name:
+        {{input value=lastName required="required"}}
+        <br />
+        Email:
+        {{input type="email" value=email required="required"}}
+        <br />
+        Password:
+        {{input type="password" value=password required="required"}}
+        <br />
+        <label>
+            {{input type="checkbox" checked=rememberMe}} Remember me
+        </label>
+        <br />
+        <button>Sign up</button>
+    </form>
+{{/if}}
