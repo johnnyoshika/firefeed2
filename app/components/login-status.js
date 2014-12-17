@@ -2,12 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-    email: 'johnny@bcjobs.ca',
+    email: '',
     password: '1Password',
 
-    loggedInUser: function() {
-        return this.get('firebase.loggedInUser');
-    }.property('firebase.loggedInUser'),
+    loggedInPerson: function() {
+        return this.get('firebase.loggedInPerson');
+    }.property('firebase.loggedInPerson'),
 
     loginUser: function(options) {
         

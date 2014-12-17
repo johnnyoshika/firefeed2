@@ -1,5 +1,7 @@
-{{#if loggedInUser}}
-    Logged in: {{loggedInUser.firstName}} {{loggedInUser.lastName}}
+{{#if loggedInPerson}}
+    Logged in:
+    {{loggedInPerson.firstName}}
+    {{loggedInPerson.lastName}}
     <button {{action "logout"}}>Log out</button>
 {{else}}
     <h2>Log in</h2>

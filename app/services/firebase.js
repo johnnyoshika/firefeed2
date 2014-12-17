@@ -6,27 +6,40 @@ export default Ember.Object.extend({
 
     authData: null,
 
-    loggedInUser: function() {
-        if (!this.get('authData'))
-            return null;
+    loggedInPerson: null,
 
-        var person = Person.create();
-        this.ref.child('people/' + this.get('authData.uid')).on('value', function(snapshot) {
-            console.log('firebase server on "value" called');
-            person.setProperties(
-                snapshot.val()
-            )
-        }, function(errorObject){
-        });
+    onAuthDataChange: function(newAuthData, previousAuthData) {
+        
+        var that = this;
 
-        return person;
-    }.property('authData'),
+        if (previousAuthData)
+            this.ref.child('people/' + previousAuthData.uid).off('value', this.onLoggedInPersonChange);
 
+        if (!newAuthData) {
+            this.set('loggedInPerson', null);
+            return;
+        }
+
+        this.set('loggedInPerson', Person.create({
+            id: newAuthData.uid
+        }));
+        this.ref.child('people/' + newAuthData.uid).on('value', this.onLoggedInPersonChange);
+    },
+    
     init: function() {
         this._super();
+
+        this.onLoggedInPersonChange = function(snapshot) {
+            this.get('loggedInPerson').setProperties(
+                snapshot.val()
+            );
+        }.bind(this);
+
         this.ref = new window.Firebase("https://firefeed2.firebaseio.com/");
         this.ref.onAuth(function(authData){
+            var previousAuthData = this.get('authData');
             this.set('authData', authData);
+            this.onAuthDataChange(authData, previousAuthData);
         }.bind(this));
     }
 
