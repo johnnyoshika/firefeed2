@@ -1,0 +1,7 @@
+{{input value=term autofocus="autofocus"}}
+
+<ul>
+    {{#each person in model}}
+        <li>{{#link-to "people.person" person.id}}{{person.name}}{{/link-to}}</li>
+    {{/each}}
+</ul>
