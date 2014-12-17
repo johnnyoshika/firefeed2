@@ -83,7 +83,7 @@ export default Ember.Component.extend({
                             this.firebase.ref.child('search/lastName').child(lastNameKey).set(authData.uid);
 
                         }.bind(this));                        
-                    }
+                    }.bind(this)
                 });
 
             }.bind(this));
