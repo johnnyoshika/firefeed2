@@ -7,7 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
     this.route('people', function() {
-        this.route('person', {path: ':person_id'})
+        this.route('person', {path: ':person_id'});
     });
   this.route('people/person');
 });

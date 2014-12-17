@@ -2,25 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-    authData: null,
-
     email: 'johnny@bcjobs.ca',
     password: '1Password',
 
-    init: function() {
-        this._super();
-        this.onAuth = function(authData){
-            this.set('authData', authData);
-        }.bind(this);
-    },
-
-    willInsertElement: function() {
-        this.firebase.ref.onAuth(this.onAuth);
-    },
-
-    willDestroyElement: function() {
-        this.firebase.ref.offAuth(this.onAuth);
-    },
+    loggedInUser: function() {
+        return this.get('firebase.loggedInUser');
+    }.property('firebase.loggedInUser'),
 
     loginUser: function(options) {
         

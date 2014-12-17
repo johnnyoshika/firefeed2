@@ -1,5 +1,5 @@
-{{#if authData}}
-    Logged in: {{authData.uid}}
+{{#if loggedInUser}}
+    Logged in: {{loggedInUser.firstName}} {{loggedInUser.lastName}}
     <button {{action "logout"}}>Log out</button>
 {{else}}
     <h2>Log in</h2>

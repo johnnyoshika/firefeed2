@@ -1,8 +1,10 @@
 export function initialize(container, application) {
-  application.inject('route', 'firebaseService', 'service:firebase');
+    ['route', 'controller', 'component'].forEach(function(componentType) {
+        application.inject(componentType, 'firebase', 'service:firebase');
+    });
 }
 
 export default {
-  name: 'firebase-service',
-  initialize: initialize
+name: 'firebase',
+    initialize: initialize
 };
